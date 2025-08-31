@@ -1,0 +1,65 @@
+name: Deploy Frontend to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+# Required for Pages deploy
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Avoid overlapping deploys
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Prepare the build output folder
+      - name: Prepare dist folder
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          # Copy everything in the repo root to dist, excluding git/workflow files
+          rsync -av --delete \
+            --exclude ".git/" \
+            --exclude ".github/" \
+            --exclude "dist/" \
+            ./ dist/
+          # Ensure GitHub Pages doesn't run Jekyll on a pure static site
+          touch dist/.nojekyll
+
+      # Generate config.js from your GitHub secret (NOT committed to git)
+      - name: Inject FRONTEND_APP_KEY into config.js
+        run: |
+          if [ -z "${{ secrets.FRONTEND_APP_KEY }}" ]; then
+            echo "FRONTEND_APP_KEY secret is missing. Add it in Repo Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+          echo "window.APP_KEY = '${{ secrets.FRONTEND_APP_KEY }}';" > dist/config.js
+          echo "Created dist/config.js"
+
+      # Upload the built site as artifact for Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

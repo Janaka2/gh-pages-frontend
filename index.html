@@ -1,45 +1,96 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GitHub Pages Frontend → HF Backend</title>
-  <style>
-    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 24px; max-width: 720px; margin: auto; }
-    input, button { font-size: 16px; padding: 8px 12px; }
-    pre { background: #f6f8fa; padding: 12px; border-radius: 8px; }
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GitHub Pages Frontend → HF Backend</title>
+    <style>
+        body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 24px; max-width: 720px; margin: auto; }
+        input, button { font-size: 16px; padding: 8px 12px; }
+        pre { background: #f6f8fa; padding: 12px; border-radius: 8px; }
+    </style>
+    <!-- Injected at deploy time by GitHub Actions -->
+    <script src="./config.js"></script>
 </head>
 <body>
-  <h1>GitHub Pages → Hugging Face Backend</h1>
-  <p>This page calls the HF FastAPI backend. No keys in the browser.</p>
+<h1>GitHub Pages → Hugging Face Backend</h1>
+<p>This page calls the HF FastAPI backend. The app key is injected at deploy time.</p>
 
-  <label>Backend URL:</label>
-  <input id="backend" style="width:100%" placeholder="https://your-username-your-space-name.hf.space" />
-  <br/><br/>
+<label>Backend URL:</label>
+<input id="backend" style="width:100%" placeholder="https://your-username-your-space-name.hf.space" />
+<br/><br/>
 
-  <label>Your name:</label>
-  <input id="name" placeholder="World" />
-  <button onclick="callBackend()">Say Hello</button>
+<label>Your name:</label>
+<input id="name" placeholder="World" />
+<button id="btn-get">Say Hello (GET)</button>
+<button id="btn-post">Say Hello (POST)</button>
 
-  <pre id="out">Enter backend URL and click the button…</pre>
+<pre id="out">Enter backend URL and click a button…</pre>
 
-  <script>
-    async function callBackend() {
+<script>
+    const out = document.getElementById('out');
+    const btnGet = document.getElementById('btn-get');
+    const btnPost = document.getElementById('btn-post');
+
+    function getBase() {
       const base = document.getElementById('backend').value.trim().replace(/\/$/, '');
-      const name = document.getElementById('name').value || 'World';
-      if (!base) {
-        document.getElementById('out').innerText = "Please enter your HF backend URL, e.g. https://user-space.hf.space";
-        return;
-      }
-      try {
-        const res = await fetch(base + "/hello?name=" + encodeURIComponent(name));
-        const data = await res.json();
-        document.getElementById('out').innerText = JSON.stringify(data, null, 2);
-      } catch (e) {
-        document.getElementById('out').innerText = "Request failed. Check CORS and URL.\n" + e;
-      }
+      if (!base) throw new Error("Please enter your HF backend URL, e.g. https://user-space.hf.space");
+      return base;
     }
-  </script>
+
+    function getName() {
+      return document.getElementById('name').value || 'World';
+    }
+
+    function mustGetAppKey() {
+      const k = (window.APP_KEY || "").trim();
+      if (!k) throw new Error("Missing APP_KEY: config.js was not generated. Check GitHub Pages deploy workflow & secret.");
+      return k;
+    }
+
+    btnGet.addEventListener('click', async () => {
+      try {
+        const base = getBase();
+        const name = getName();
+        const APP_KEY = mustGetAppKey();
+
+        const res = await fetch(base + "/hello?name=" + encodeURIComponent(name), {
+          method: "GET",
+          headers: {
+            "X-App-Key": APP_KEY
+          },
+          // credentials: "omit" (default)
+        });
+
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        out.textContent = "GET failed:\n" + (e?.message || e);
+      }
+    });
+
+    btnPost.addEventListener('click', async () => {
+      try {
+        const base = getBase();
+        const name = getName();
+        const APP_KEY = mustGetAppKey();
+
+        const res = await fetch(base + "/hello", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-App-Key": APP_KEY
+          },
+          body: JSON.stringify({ name })
+        });
+
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        out.textContent = "POST failed:\n" + (e?.message || e);
+      }
+    });
+</script>
 </body>
 </html>

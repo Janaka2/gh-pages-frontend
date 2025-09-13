@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janaka Premathilaka | Professional Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .chat-container {
+            height: 70vh;
+            min-height: 500px;
+            max-height: 700px;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            background: white;
+            border: 1px solid #e5e7eb;
+        }
+        @media (max-width: 768px) {
+            .chat-container {
+                height: 75vh;
+                min-height: 400px;
+            }
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 1rem;
+        }
+        .profile-image {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .section-heading {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6 0%, #6366f1 100%);
+            border-radius: 3px;
+        }
+        .quick-fact-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .quick-fact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .linkedin-btn {
+            background: linear-gradient(90deg, #0a66c2 0%, #0a66c2 100%);
+            transition: all 0.3s ease;
+        }
+        .linkedin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(10, 102, 194, 0.3);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+<div class="gradient-bg">
+    <!-- Header -->
+    <header class="py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-down">
+            <div class="flex justify-center mb-6">
+                <div class="w-32 h-32 rounded-full bg-white overflow-hidden border-4 border-white profile-image">
+                    <img src="http://static.photos/technology/200x200/42" alt="Janaka Premathilaka" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Janaka Premathilaka</h1>
+            <div class="flex items-center justify-center space-x-2 text-blue-600 mb-4">
+                <i data-feather="map-pin" class="w-5 h-5"></i>
+                <span class="text-lg">Zug, Switzerland</span>
+            </div>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Welcome to my professional profile. Feel free to ask my AI assistant any questions about my career, experience, and skills.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Chatbot Section -->
+            <section class="mb-16" data-aos="fade-up">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center section-heading">Ask About My Career</h2>
+                <p class="text-gray-600 mb-8 text-center max-w-3xl mx-auto">
+                    Get instant answers about my experience, skills, and availability. The AI assistant can provide detailed information on my professional background.
+                </p>
+                <div class="chat-container">
+                    <iframe src="https://janaka2-mypa.hf.space" title="Janaka's Career Assistant"></iframe>
+                </div>
+            </section>
+
+            <!-- Quick Facts -->
+            <section class="mb-16" data-aos="fade-up">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center section-heading">Quick Facts</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl quick-fact-card">
+                        <div class="text-blue-500 mb-4 flex justify-center">
+                            <div class="p-3 bg-blue-50 rounded-full">
+                                <i data-feather="briefcase" class="w-8 h-8"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-medium mb-2 text-center">Experience</h3>
+                        <p class="text-gray-600 text-center">Ask about my professional journey, roles, and achievements across various organizations.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl quick-fact-card">
+                        <div class="text-blue-500 mb-4 flex justify-center">
+                            <div class="p-3 bg-blue-50 rounded-full">
+                                <i data-feather="award" class="w-8 h-8"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-medium mb-2 text-center">Skills</h3>
+                        <p class="text-gray-600 text-center">Learn about my technical expertise, soft skills, and specialized areas of knowledge.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl quick-fact-card">
+                        <div class="text-blue-500 mb-4 flex justify-center">
+                            <div class="p-3 bg-blue-50 rounded-full">
+                                <i data-feather="book" class="w-8 h-8"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-medium mb-2 text-center">Education</h3>
+                        <p class="text-gray-600 text-center">Information about my academic background, certifications, and continuous learning.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Info -->
+            <section class="mb-16" data-aos="fade-up">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center section-heading">What You Can Discover</h2>
+                <div class="bg-white rounded-2xl p-8 shadow-md border border-gray-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4 text-blue-600">Professional Inquiries</h3>
+                            <ul class="space-y-3 text-gray-600">
+                                <li class="flex items-start">
+                                    <i data-feather="check-circle" class="w-5 h-5 text-green-500 mr-2 mt-0.5"></i>
+                                    <span>Project experience and outcomes</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-feather="check-circle" class="w-5 h-5 text-green-500 mr-2 mt-0.5"></i>
+                                    <span>Technical architecture expertise</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-feather="check-circle" class="w-5 h-5 text-green-500 mr-2 mt-0.5"></i>
+                                    <span>Team leadership approach</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-feather="check-circle" class="w-5 h-5 text-green-500 mr-2 mt-0.5"></i>
+                                    <span>Problem-solving methodologies</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4 text-blue-600">Practical Details</h3>
+                            <ul class="space-y-3 text-gray-600">
+                                <li class="flex items-start">
+                                    <i data-feather="check-circle" class="w-5 h-5 text-green-500 mr-2 mt-0.5"></i>
+                                    <span>Availability and engagement models</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-feather="check-circle" class="w-5 h-5 text-green-500 mr-2 mt-0.5"></i>
+                                    <span>Industry-specific experience</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-feather="check-circle" class="w-5 h-5 text-green-500 mr-2 mt-0.5"></i>
+                                    <span>References and work samples</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-feather="check-circle" class="w-5 h-5 text-green-500 mr-2 mt-0.5"></i>
+                                    <span>Compensation expectations</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="text-center" data-aos="fade-up">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Want to connect directly?</h2>
+                <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                    If you'd like to discuss potential opportunities after learning about my profile, feel free to reach out on LinkedIn.
+                </p>
+                <a href="#" class="inline-flex items-center px-6 py-3 text-white font-medium rounded-lg linkedin-btn">
+                    <i data-feather="linkedin" class="w-5 h-5 mr-2"></i>
+                    Connect on LinkedIn
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-200 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 2023 Janaka Premathilaka. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-500 hover:text-blue-500 transition-colors">
+                        <i data-feather="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-800 transition-colors">
+                        <i data-feather="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">
+                        <i data-feather="book" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-yellow-500 transition-colors">
+                        <i data-feather="cpu" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-green-500 transition-colors">
+                        <i data-feather="message-circle" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+    });
+    feather.replace();
+</script>
+</body>
+</html>

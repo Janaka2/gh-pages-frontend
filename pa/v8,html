@@ -107,6 +107,9 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
             border: 1px solid #e2e8f0;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
         }
 
         .chat-header {
@@ -118,41 +121,16 @@
             gap: 10px;
         }
 
-        .chat-content {
-            padding: 20px;
-            min-height: 300px;
-            background: #f8fafc;
+        .chat-iframe-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
         }
 
-        .chat-message {
-            display: flex;
-            margin-bottom: 15px;
-        }
-
-        .ai-message {
-            justify-content: flex-start;
-        }
-
-        .user-message {
-            justify-content: flex-end;
-        }
-
-        .message-bubble {
-            max-width: 70%;
-            padding: 12px 18px;
-            border-radius: 18px;
-        }
-
-        .ai-bubble {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-bottom-left-radius: 5px;
-        }
-
-        .user-bubble {
-            background: #3b82f6;
-            color: white;
-            border-bottom-right-radius: 5px;
+        .chat-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .quick-facts {
@@ -226,6 +204,29 @@
             border-left: 4px solid #3b82f6;
         }
 
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #e2e8f0;
+            border-top: 5px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -239,115 +240,116 @@
                 grid-template-columns: 1fr;
             }
 
-            .message-bubble {
-                max-width: 85%;
+            .chat-container {
+                height: 500px;
             }
         }
     </style>
 </head>
 <body>
-<header>
-    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Janaka Premathilaka" class="profile-img">
-    <h1>Janaka Premathilaka</h1>
-    <div class="location">
-        <i class="fas fa-map-marker-alt"></i>
-        <span>Zug, Switzerland</span>
-    </div>
-    <p class="intro">Welcome to my professional profile. Feel free to ask my AI assistant any questions about my career, experience, and skills.</p>
-</header>
+    <header>
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Janaka Premathilaka" class="profile-img">
+        <h1>Janaka Premathilaka</h1>
+        <div class="location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Zug, Switzerland</span>
+        </div>
+        <p class="intro">Welcome to my professional profile. Feel free to ask my AI assistant any questions about my career, experience, and skills.</p>
+    </header>
 
-<div class="container">
-    <div class="section">
-        <h2>Ask About My Career</h2>
-        <p>Get instant answers about my experience, skills, and availability. The AI assistant can provide detailed information on my professional background.</p>
+    <div class="container">
+        <div class="section">
+            <h2>Ask About My Career</h2>
+            <p>Get instant answers about my experience, skills, and availability. The AI assistant can provide detailed information on my professional background.</p>
 
-        <div class="chat-container">
-            <div class="chat-header">
-                <i class="fas fa-robot"></i>
-                <span>Janaka AI — Personal Tech Assistant</span>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i>
+                    <span>Janaka AI — Personal Tech Assistant</span>
+                </div>
+                <div class="chat-iframe-container">
+                    <iframe
+                        src="https://janaka2-mypa.hf.space"
+                        class="chat-iframe"
+                        title="Janaka's Career Assistant"
+                        onload="document.getElementById('loading').style.display='none';"
+                    ></iframe>
+                    <div id="loading" class="loading">
+                        <div class="spinner"></div>
+                        <p>Loading AI Assistant...</p>
+                    </div>
+                </div>
             </div>
-            <div class="chat-content">
-                <div class="chat-message ai-message">
-                    <div class="message-bubble ai-bubble">
-                        Hi there! I'm Janaka's AI assistant. How can I help you learn about his professional background?
+
+            <div class="privacy-note">
+                <i class="fas fa-shield-alt"></i> No chat content is sold or shared. If you leave your email, it's used only to follow up on your request.
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section">
+            <h2>Quick Facts</h2>
+            <div class="quick-facts">
+                <div class="fact-card">
+                    <div class="fact-icon">
+                        <i class="fas fa-briefcase"></i>
                     </div>
+                    <h3>Experience</h3>
+                    <p>Ask about my professional journey, roles, and achievements across various organizations.</p>
                 </div>
-                <div class="chat-message user-message">
-                    <div class="message-bubble user-bubble">
-                        Can you tell me about Janaka's experience with AI automation?
+                <div class="fact-card">
+                    <div class="fact-icon">
+                        <i class="fas fa-code"></i>
                     </div>
+                    <h3>Skills</h3>
+                    <p>Learn about my technical expertise, soft skills, and specialized areas of knowledge.</p>
                 </div>
-                <div class="chat-message ai-message">
-                    <div class="message-bubble ai-bubble">
-                        Certainly! Janaka has extensive experience in AI automation including LLM systems, AI agents, and RAG architectures. He's worked on several projects implementing these technologies in enterprise environments.
+                <div class="fact-card">
+                    <div class="fact-icon">
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
+                    <h3>Education</h3>
+                    <p>Information about my academic background, certifications, and continuous learning.</p>
                 </div>
             </div>
         </div>
 
-        <div class="privacy-note">
-            <i class="fas fa-shield-alt"></i> No chat content is sold or shared. If you leave your email, it's used only to follow up on your request.
+        <div class="contact-info">
+            <h2>Interested in Working Together?</h2>
+            <p>If you'd like to discuss potential opportunities after learning about my profile, feel free to reach out.</p>
+            <a href="#" class="contact-button">
+                <i class="fas fa-envelope"></i> Contact Me
+            </a>
         </div>
     </div>
 
-    <hr class="divider">
+    <footer>
+        <p>© 2023 Janaka Premathilaka. All rights reserved.</p>
+    </footer>
 
-    <div class="section">
-        <h2>Quick Facts</h2>
-        <div class="quick-facts">
-            <div class="fact-card">
-                <div class="fact-icon">
-                    <i class="fas fa-briefcase"></i>
-                </div>
-                <h3>Experience</h3>
-                <p>Ask about my professional journey, roles, and achievements across various organizations.</p>
-            </div>
-            <div class="fact-card">
-                <div class="fact-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-                <h3>Skills</h3>
-                <p>Learn about my technical expertise, soft skills, and specialized areas of knowledge.</p>
-            </div>
-            <div class="fact-card">
-                <div class="fact-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <h3>Education</h3>
-                <p>Information about my academic background, certifications, and continuous learning.</p>
-            </div>
-        </div>
-    </div>
+    <script>
+        // Simple animation for page elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fact-card, .section');
 
-    <div class="contact-info">
-        <h2>Interested in Working Together?</h2>
-        <p>If you'd like to discuss potential opportunities after learning about my profile, feel free to reach out.</p>
-        <a href="#" class="contact-button">
-            <i class="fas fa-envelope"></i> Contact Me
-        </a>
-    </div>
-</div>
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
 
-<footer>
-    <p>© 2025 Janaka Premathilaka. All rights reserved.</p>
-</footer>
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
 
-<script>
-    // Simple animation for page elements
-    document.addEventListener('DOMContentLoaded', function() {
-        const elements = document.querySelectorAll('.fact-card, .section');
-
-        elements.forEach((element, index) => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-
-            setTimeout(() => {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }, 100 + (index * 100));
+            // Add event listener for iframe loading
+            const iframe = document.querySelector('.chat-iframe');
+            iframe.addEventListener('load', function() {
+                document.getElementById('loading').style.display = 'none';
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
